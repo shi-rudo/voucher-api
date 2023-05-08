@@ -1,0 +1,23 @@
+logging:
+  level:
+    root: info
+
+server:
+  port: 8083
+
+spring:
+  config:
+    import: .env[.properties]
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${BACKEND_HOST_PRIMARY}:${POSTGRES_MASTER_EXTERNAL_PORT}/${POSTGRES_MASTER_DATABASE}
+    username: ${POSTGRES_MASTER_USERNAME}
+    password: ${POSTGRES_MASTER_PASSWORD}
+
+
+  flyway:
+    url: jdbc:postgresql://${BACKEND_HOST_PRIMARY}:${POSTGRES_MASTER_EXTERNAL_PORT}/${POSTGRES_MASTER_DATABASE}
+    user: ${POSTGRES_MASTER_USERNAME}
+    password: ${POSTGRES_MASTER_PASSWORD}
+    enabled: false

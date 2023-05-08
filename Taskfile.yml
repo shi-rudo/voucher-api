@@ -1,0 +1,18 @@
+version: '3'
+
+tasks:
+
+  start:
+    dir: '{{.USER_WORKING_DIR}}'
+    desc: start all the services in dev mode
+    cmds:
+      - cmd: cp ./docker/.env ./spring-boot/src/main/resources/.env
+      - cmd: docker-compose -f './docker/docker-compose.yaml'  up --build
+
+  clean-docker:
+    dir: ./docker
+    desc: clean all
+    cmds:
+      - cmd: docker compose down
+      - cmd: docker container prune -f
+      - cmd: docker volume prune -f

@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+
+
+  # For scaling check : https://hub.docker.com/r/bitnami/pgpool/
+  postgresql-master:
+    image: docker.io/bitnami/postgresql:15
+    container_name: 'postgres-master'
+    env_file:
+      - .env
+    ports:
+      - '${POSTGRES_MASTER_EXTERNAL_PORT}:${POSTGRES_MASTER_INTERNAL_PORT}'
+    volumes:
+      - 'postgres-master-data:/bitnami/postgresql'
+    networks:
+      - localnetwork
+    environment:
+      - POSTGRESQL_REPLICATION_MODE=master
+      - POSTGRESQL_REPLICATION_USER=${POSTGRES_MASTER_USERNAME}
+      - POSTGRESQL_REPLICATION_PASSWORD=${POSTGRES_MASTER_PASSWORD}
+      - POSTGRESQL_USERNAME=${POSTGRES_MASTER_USERNAME}
+      - POSTGRESQL_PASSWORD=${POSTGRES_MASTER_PASSWORD}
+      - POSTGRESQL_DATABASE=${POSTGRES_MASTER_DATABASE}
+
+  backend:
+    build:
+        context: ./../spring-boot
+        dockerfile: Dockerfile
+    container_name: 'spring-boot'
+    env_file:
+      - .env
+    depends_on:
+      - postgresql-master
+    ports:
+      - "8080:8080"
+    environment:
+      - POSTGRES_DB=example
+    networks:
+      - localnetwork
+
+
+volumes:
+  postgres-master-data:
+
+networks:
+  localnetwork:
