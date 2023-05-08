@@ -2,7 +2,14 @@ version: '3'
 
 tasks:
 
-  start:
+  start-dev:
+    dir: '{{.USER_WORKING_DIR}}'
+    desc: start all the services in dev mode
+    cmds:
+      - cmd: cp ./docker/.env ./spring-boot/src/main/resources/.env
+      - cmd: docker-compose -f './docker/docker-compose.yaml'  up --build postgresql-master
+
+  serve:
     dir: '{{.USER_WORKING_DIR}}'
     desc: start all the services in dev mode
     cmds:
