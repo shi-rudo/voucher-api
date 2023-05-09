@@ -1,4 +1,4 @@
-package com.dennis.voucher.infrastructure.repository
+package com.dennis.voucher.infrastructure.mail
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean

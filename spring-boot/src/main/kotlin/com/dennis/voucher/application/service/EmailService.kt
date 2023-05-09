@@ -1,7 +1,7 @@
 package com.dennis.voucher.application.service
 
+import com.dennis.voucher.infrastructure.mail.EmailConfig
 import com.dennis.voucher.infrastructure.orm.Voucher
-import com.dennis.voucher.infrastructure.repository.EmailConfig
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.mail.SimpleMailMessage
@@ -20,7 +20,7 @@ class EmailService @Autowired constructor(
 
     @Value("\${SPRING_HTTP_PROTOCOL}")
     private val protocol: String? = null
-    
+
     fun sendVoucherEmail(to: String, voucher: Voucher) {
         val sender = mailSender.javaMailSender()
         val message = SimpleMailMessage()
