@@ -9,11 +9,14 @@ tasks:
       - cmd: cp ./docker/.env ./spring-boot/src/main/resources/.env
       - cmd: docker-compose -f './docker/docker-compose.yaml'  up --build postgresql-master
 
-  serve:
+  build:
     dir: '{{.USER_WORKING_DIR}}'
     desc: start all the services in dev mode
     cmds:
+      - cmd: docker-compose -f './docker/docker-compose.yaml'  up -d --build postgresql-master
       - cmd: cp ./docker/.env ./spring-boot/src/main/resources/.env
+      - cmd: cd ./spring-boot && ./gradlew build && cd ..
+      - cmd: cd ./docker && docker compose down && docker container prune -f && docker volume prune -f && cd ..
       - cmd: docker-compose -f './docker/docker-compose.yaml'  up --build
 
   clean-docker:

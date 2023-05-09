@@ -20,4 +20,13 @@ spring:
     url: jdbc:postgresql://${BACKEND_HOST_PRIMARY}:${POSTGRES_MASTER_EXTERNAL_PORT}/${POSTGRES_MASTER_DATABASE}
     user: ${POSTGRES_MASTER_USERNAME}
     password: ${POSTGRES_MASTER_PASSWORD}
-    enabled: false
+    enabled: true
+
+  jpa:
+    show-sql: true
+
+  mail:
+    host: ${EMAIL_HOST}
+    port: ${EMAIL_PORT}
+    username: ${EMAIL_USER}
+    password: ${EMAIL_PASSWORD}
