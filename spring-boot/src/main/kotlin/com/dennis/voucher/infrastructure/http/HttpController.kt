@@ -18,6 +18,7 @@ class HttpController @Autowired constructor(
     suspend fun reserveVoucher(@RequestBody request: ReserveVoucherRequest): ResponseEntity<ApiResponse> {
         return try {
             val command = ReserveVoucher(email = request.email)
+            // TODO: USE SYNC COMMAND QUEUE
             reserveVoucherHandler.handle(command)
             ResponseEntity.ok(ApiResponse.Success())
         } catch (e: Exception) {
@@ -33,6 +34,7 @@ class HttpController @Autowired constructor(
     ): ResponseEntity<ApiResponse> {
         return try {
             val command = ConfirmVoucher(email = email, code = token)
+            // TODO: USE SYNC COMMAND QUEUE
             confirmVoucherHandler.handle(command)
             ResponseEntity.ok(ApiResponse.Success())
         } catch (e: Exception) {

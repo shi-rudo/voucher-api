@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository
 import java.util.*
 
 
+// TODO: IMPLEMENT ASYNC OR REACTIVE REPOSITORIES
 interface VoucherRepository : CrudRepository<Voucher, UUID> {
 
     // ensures that no other transaction can update the Voucher entity until the current transaction completes
