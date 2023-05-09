@@ -14,7 +14,7 @@ services:
     volumes:
       - 'postgres-master-data:/bitnami/postgresql'
     networks:
-      - localnetwork
+      - default
     environment:
       - POSTGRESQL_REPLICATION_MODE=master
       - POSTGRESQL_REPLICATION_USER=${POSTGRES_MASTER_USERNAME}
@@ -25,8 +25,8 @@ services:
 
   backend:
     build:
-        context: ./../spring-boot
-        dockerfile: Dockerfile
+      context: ./../spring-boot
+      dockerfile: Dockerfile
     container_name: 'spring-boot'
     env_file:
       - .env
@@ -37,11 +37,8 @@ services:
     environment:
       - POSTGRES_DB=example
     networks:
-      - localnetwork
+      - default
 
 
 volumes:
   postgres-master-data:
-
-networks:
-  localnetwork:
