@@ -15,14 +15,12 @@ class EmailService @Autowired constructor(
     @Value("\${BACKEND_HOST_PRIMARY}")
     private val host: String? = null
 
-
     @Value("\${SPRING_LOCAL_PORT}")
     private val port: String? = null
 
     @Value("\${SPRING_HTTP_PROTOCOL}")
     private val protocol: String? = null
-
-
+    
     fun sendVoucherEmail(to: String, voucher: Voucher) {
         val sender = mailSender.javaMailSender()
         val message = SimpleMailMessage()
