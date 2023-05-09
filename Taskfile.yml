@@ -14,7 +14,6 @@ tasks:
     desc: start all the services in dev mode
     cmds:
       - cmd: docker-compose -f './docker/docker-compose.yaml'  up -d --build postgresql-master
-      - cmd:
       - cmd: cp ./docker/.env ./spring-boot/src/main/resources/.env
       - cmd: cd ./spring-boot && ./gradlew build && cd ..
       - cmd: cd ./docker && docker compose down && docker container prune -f && docker volume prune -f && cd ..
