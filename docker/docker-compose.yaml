@@ -25,15 +25,15 @@ services:
 
   backend:
     build:
-        context: ./../spring-boot
-        dockerfile: Dockerfile
+      context: ./../spring-boot
+      dockerfile: Dockerfile
     container_name: 'spring-boot'
     env_file:
       - .env
     depends_on:
       - postgresql-master
     ports:
-      - "8080:8080"
+      - '${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT}'
     environment:
       - POSTGRES_DB=example
     networks:
