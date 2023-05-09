@@ -23,7 +23,7 @@ services:
       - POSTGRESQL_PASSWORD=${POSTGRES_MASTER_PASSWORD}
       - POSTGRESQL_DATABASE=${POSTGRES_MASTER_DATABASE}
 
-  backend:
+  spring-boot:
     build:
       context: ./../spring-boot
       dockerfile: Dockerfile
